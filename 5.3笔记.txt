@@ -1,0 +1,325 @@
+1.
+package w;
+import java.util.*;
+
+public class Test{
+	public static void main(String[] args)
+	{
+		Employee[] staff =new Employee[3];
+		
+		staff[0]=new Employee("Harry",35000);
+		staff[1]=new Employee("Cral",75000);
+		staff[2]=new Employee("Tony",38000);
+	
+		Arrays.sort(staff);
+	
+	for(Employee e : staff)//foreach 遍历循环
+		System.out.println("name="+e.getName()+",salary="+e.getSalary());
+	
+	}
+
+}
+class Employee implements Comparable<Employee>//使用关键字 implements实现接口
+{
+	public Employee(String n,double s)
+	{
+		name = n;
+		salary=s;
+	
+		
+	}
+	public String getName()
+	{
+		return name;
+	}
+	public double getSalary()
+	{
+		return salary;
+	}
+	/*public void raiseSalary(double byPercent)
+	{
+		double raise =salary*byPercent/100;
+		salary+=raise;
+	}*/
+	public int compareTo(Employee other)//实现Arrays.sort(staff)排序的方法，compareTo方法作为参数名称比较“this”与“other”
+   {
+	if(salary<other.salary)return -3;// 小于other值,返回值为负整数
+	if(salary>other.salary)return 3;//大于other值，返回值为正整数
+	return 0;//相等时返回0值
+   }
+	private String name;
+	private double salary;
+}
+/* Extends与implements 的区别在于：Extends可以理解为全盘继承了父类的功能。implements可以理解为为这个类附加一些额外的功能；interface定义一些方法,并没有实现,需要implements来实现才可用。extend可以继承一个接口,但仍是一个接口,也需要implements之后才可用。对于class而言，Extends用于(单)继承一个类（class），而implements用于实现一个接口(interface)。*/
+
+2.
+接口不是类，但是可以声明接口变量
+例如：
+Comparable x;
+接口变量必须引用实现了接口的类对象
+例如：
+x=new Employee(...);
+
+3.
+package w;
+import java.util.*;
+
+public class Test{
+	public static void main(String[] args)
+	{
+		try//通过try catch 捕获异常。
+		{
+			Employee original=new Employee("John ",50000);
+			original.setHireDay(2000,1,1);
+			Employee copy =original.clone();
+			copy.raiseSalary(10);//改变工资
+			copy.setHireDay(2002,12,31);//改变入职时间
+			System.out.println("original="+original);//显示原数据，因为深拷贝，原对象未发生改变
+			System.out.println("copy="+copy);//显示复制后改过的数据
+		}
+		catch(CloneNotSupportedException e)
+		{
+			e.printStackTrace();//在命令行打印异常信息在程序中出错的位置及原因。
+		}
+	}
+		
+}
+
+class Employee implements Cloneable//实现cloneable接口
+{
+	public Employee(String n,double s)
+	{
+		name=n;
+		salary=s;
+	}
+	public Employee clone()throws CloneNotSupportedException//声明异常
+	{
+		Employee cloned=(Employee)super.clone();/*克隆所有可变的实例域，
+		cloned.hireDay=(Date)hireDay.clone();          使用clone()实现深克隆*/
+		return cloned;
+	}
+	
+public void setHireDay(int  year,int month,int day)
+{
+	hireDay=new GregorianCalendar(year,month-1,day).getTime();
+}
+
+
+
+public void raiseSalary(double byPercent)
+{
+	double raise=salary*byPercent/100;
+	salary+=raise;
+}
+public String toString() 
+{
+	return "Employee[name="+name+",salary="+salary+",hireday"+hireDay+"]";
+}
+private String name;
+private double salary;
+private Date hireDay;
+}
+结果如下：
+original=Employee[name=John ,salary=50000.0,hiredaySat Jan 01 00:00:00 CST 2000]
+copy=Employee[name=John ,salary=55000.0,hiredayTue Dec 31 00:00:00 CST 2002]
+
+ 
+ /*克隆就是复制一个对象的复本.但一个对象中可能有基本数据类型,如:int,long,float等,也同时含有对象数据类型如(数组,集合等)。被克隆得到的对象基本类型的值修改了,原对象的值不会改变.这种适合shadow clone(浅克隆).
+
+   但如果你要改变一个非基本类型的值时,原对象的值却改变了,.比如一个数组,内存中只copy他的地址,而这个地址指向的值并没有 copy,当clone时,两个地址指向了一个值,这样一旦这个值改变了,原来的值当然也变了,因为他们共用一个值.,这就必须得用深克隆(deep clone)*/
+
+4.
+
+//序列化实现对象的拷贝，原理是将母对象写到字节流中，再从字节流读出获得新对象，这样避免了引用共享的问题实现深拷贝，缺点是效率较低。
+
+package w;
+import java.io.Serializable;
+import java.util.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class Test{
+	public static void main(String[] args)
+	{
+		
+			Employee original=new Employee("John ",50000);
+			original.setHireDay(2000,1,1);
+			
+			Employee copy = CloneUtils.clone(original);
+			copy.raiseSalary(10);
+			copy.setHireDay(2002,12,31);
+			System.out.println("original="+original);
+			System.out.println("copy="+copy);
+
+	}
+		
+}
+
+class Employee implements Serializable//使用该工具类的对象只要实现Serializable接口就可实现对象的克隆，无须继承Cloneable接口实现clone()方法。
+{
+	public Employee(String n,double s)
+	{
+		name=n;
+		salary=s;
+	}
+
+	
+public void setHireDay(int  year,int month,int day)
+{
+	hireDay=new GregorianCalendar(year,month-1,day).getTime();
+}
+
+public void raiseSalary(double byPercent)
+{
+	double raise=salary*byPercent/100;
+	salary+=raise;
+}
+public String toString() 
+{
+	return "Employee[name="+name+",salary="+salary+",hireday"+hireDay+"]";
+	
+}
+private String name;
+private double salary;
+private Date hireDay;
+}
+
+public class CloneUtils {//
+	public static <T extends Serializable> T clone(T obj)
+	{
+		T cloneObj=null;
+		try//实现将母对象转化为输入输出字节流，从而产生与母对象无关的新对象
+		{
+			ByteArrayOutputStream out=new ByteArrayOutputStream();
+			ObjectOutputStream obs=new ObjectOutputStream(out);
+			obs.writeObject(obj);
+			obs.close();
+			
+			ByteArrayInputStream ios=new ByteArrayInputStream(out.toByteArray());
+			ObjectInputStream ois=new ObjectInputStream(ios);
+			
+			cloneObj=(T)ois.readObject();
+			ois.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return cloneObj;
+	}
+
+}
+结果如下：
+original=Employee[name=John ,salary=50000.0,hiredaySat Jan 01 00:00:00 CST 2000]
+copy=Employee[name=John ,salary=55000.0,hiredayTue Dec 31 00:00:00 CST 2002]
+
+
+5。通过计时器，在给定的十秒内发出通告。
+package w;
+
+
+
+import java.awt.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import java.util.*;
+
+
+import javax.swing.JOptionPane;
+
+public class Time {
+public static void main(String[] args)
+{
+	ActionListener listener=new TimePrinter();
+	Timer t=new Timer(10000,listener);//设置时间
+	t.start();
+	JOptionPane.showMessageDialog(null, "quit?");//退出通知
+	System.exit(0);
+}
+}
+
+class TimePrinter implements ActionListener
+{
+	public void actionPerformed(ActionEvent event)
+	{
+		Date now=new Date();
+		System.out.println("At the tone,the time is"+now);//给出当前时间
+		Toolkit.getDefaultToolkit().beep();//发出响声
+		}
+}
+
+6.
+/*如果有一个TimePrinter类是一个常规类，它通过TalkingClock类的公有方式访问beep标志，
+而使内部类可以给予改进，即不必提供仅用于访问其他类的访问器。*/
+
+package w;
+
+
+
+import java.awt.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import java.util.*;
+
+
+import javax.swing.JOptionPane;
+
+public class Time {
+public static void main(String[] args)
+{
+	TalkingClock clock=new TalkingClock(1000,true);
+	clock.start();
+	JOptionPane.showMessageDialog(null, "quit?");
+	System.exit(0);
+}
+}
+
+class TalkingClock
+{
+	public TalkingClock(int interval,boolean beep)
+	{
+		this.interval=interval;
+		this.beep=beep;
+		}
+	public void start()
+	{
+		ActionListener listener=new TimePrinter();
+		Timer t=new Timer(interval,listener);
+		t.start();
+	}
+	private int interval;
+	private boolean beep;
+	
+	private class TimePrinter implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			Date now=new Date();
+			System.out.println("At the tone,the time is"+now);
+			if(beep)Toolkit.getDefaultToolkit().beep();
+		}
+	}
+}
+结果如下：
+At the tone,the time isThu May 03 16:52:05 CST 2018
+At the tone,the time isThu May 03 16:52:06 CST 2018
+At the tone,the time isThu May 03 16:52:07 CST 2018
+At the tone,the time isThu May 03 16:52:08 CST 2018
+At the tone,the time isThu May 03 16:52:09 CST 2018
+At the tone,the time isThu May 03 16:52:10 CST 2018
+At the tone,the time isThu May 03 16:52:11 CST 2018
+At the tone,the time isThu May 03 16:52:12 CST 2018
+At the tone,the time isThu May 03 16:52:13 CST 2018
+
+
+
+
