@@ -1,0 +1,159 @@
+1.
+局部类
+public void start(int interval,final boolean beep)//此处beep需要用final声明,因为局部类只可引用定义为final的局部变量
+{
+   class TimePrinter implements ActionListener
+     {
+         public void actionPerformed(ActionEvent event)
+            {
+               Date now=new Date();
+               System.out.println("At the tone ,the time is "+now);
+               if(beep)Toolkit.getDefaultToolkit().beep();
+             }
+       }
+    ActionListener listener=new TimePrinter();//TimePrinter 只在start方法创建这个类型的对象时使用一次，所以可以在一个方法中定义局部类
+    Timer t=new Timer(1000,listener);
+    t.start();
+}
+
+2.
+匿名内部类
+
+public void start(int interval,final boolean beep)
+{
+  ActionListener listener=new
+     ActionListener()//创建一个实现ActionListener接口的类
+     {
+         public void actionPerformed(ActionEvent event)//实现actionPerformed方法定义在{}内
+            {
+               Date now=new Date();
+               System.out.println("At the tone ,the time is "+now);
+               if(beep)Toolkit.getDefaultToolkit().beep();
+             }
+       };//为什么需要加“；”？
+    Timer t=new Timer(1000,listener);
+    t.start();
+}
+
+语法格式为：
+
+new SuperType(construction paraneters)
+{
+inner class methods and data
+}
+其中，SuperType可以是接口，内部类实现接口。也可以是一个类，则内部类扩展他。
+
+3.
+
+完整程序
+
+package w;
+
+
+
+import java.awt.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import javax.swing.Timer;
+import java.util.*;
+
+
+import javax.swing.JOptionPane;
+
+public class Time {
+public static void main(String[] args)
+{
+	TalkingClock clock=new TalkingClock();
+	clock.start(1000,true);//为什么在这赋值？
+	JOptionPane.showMessageDialog(null, "quit?");
+	System.exit(0);
+}
+}
+
+class TalkingClock
+{
+	public void start(int interval,final boolean beep)
+	{
+	  ActionListener listener=new
+	     ActionListener()//创建一个实现ActionListener接口的类
+	     {
+	         public void actionPerformed(ActionEvent event)//实现actionPerformed方法定义在{}内
+	            {
+	               Date now=new Date();
+	               System.out.println("At the tone ,the time is "+now);
+	               if(beep)Toolkit.getDefaultToolkit().beep();
+	             }
+	       };
+	    Timer t=new Timer(1000,listener);
+	    t.start();
+	}
+}
+
+结果如下：
+At the tone ,the time is Fri May 04 10:04:03 CST 2018
+At the tone ,the time is Fri May 04 10:04:04 CST 2018
+At the tone ,the time is Fri May 04 10:04:05 CST 2018
+
+4.
+
+静态内部类
+
+package w;
+
+public class Test2 {
+	public static void main(String[] args)
+	{
+		double[]d=new double[20];
+		for(int i=0;i<d.length;i++)
+			d[i]=100*Math.random();
+		ArrayAlg.Pair p=ArrayAlg.minmax(d);//为了减少冲突，Pair类设置为ArrayAlg内部公有类，用ArrayAlg.Pair访问他。
+		System.out.println("min="+p.getFirst());
+		System.out.println("max="+p.getSecond());
+	}
+
+}
+class ArrayAlg
+{
+	public static class Pair//定义为ArrayAlg内部公有类可以解决外部可能存在的冲突，pair对象中不需要引用其他任何对象，故内部声明为static.
+	{
+		public Pair(double f,double s)//定义pair类是为了后面完成一次取两个值的方法
+		{
+			first=f;
+			second=s;
+		}
+		public double getFirst()
+		{
+			return first;
+		}
+		public double getSecond()
+		{
+		    return second;	
+		}
+		private double first;
+		private double second;
+		
+	}
+	public static Pair minmax(double[] values)//定义Pair minmax取极大极小值的方法
+	{
+		double min=Double.MAX_VALUE;
+		double max=Double.MIN_VALUE;
+		for(double v:values)
+		{
+			if(min>v)min=v;
+			if(max<v)max=v;
+		}
+		return new Pair(min,max);
+	}
+}
+
+结果如下：
+min=8.812840870599647
+max=92.43143108007123
+
+5.
+
+
+
