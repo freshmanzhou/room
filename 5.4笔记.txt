@@ -1,6 +1,6 @@
 1.
-¾Ö²¿Àà
-public void start(int interval,final boolean beep)//´Ë´¦beepĞèÒªÓÃfinalÉùÃ÷,ÒòÎª¾Ö²¿ÀàÖ»¿ÉÒıÓÃ¶¨ÒåÎªfinalµÄ¾Ö²¿±äÁ¿
+å±€éƒ¨ç±»
+public void start(int interval,final boolean beep)//æ­¤å¤„beepéœ€è¦ç”¨finalå£°æ˜,å› ä¸ºå±€éƒ¨ç±»åªå¯å¼•ç”¨å®šä¹‰ä¸ºfinalçš„å±€éƒ¨å˜é‡
 {
    class TimePrinter implements ActionListener
      {
@@ -11,41 +11,41 @@ public void start(int interval,final boolean beep)//´Ë´¦beepĞèÒªÓÃfinalÉùÃ÷,ÒòÎª
                if(beep)Toolkit.getDefaultToolkit().beep();
              }
        }
-    ActionListener listener=new TimePrinter();//TimePrinter Ö»ÔÚstart·½·¨´´½¨Õâ¸öÀàĞÍµÄ¶ÔÏóÊ±Ê¹ÓÃÒ»´Î£¬ËùÒÔ¿ÉÒÔÔÚÒ»¸ö·½·¨ÖĞ¶¨Òå¾Ö²¿Àà
+    ActionListener listener=new TimePrinter();//TimePrinter åªåœ¨startæ–¹æ³•åˆ›å»ºè¿™ä¸ªç±»å‹çš„å¯¹è±¡æ—¶ä½¿ç”¨ä¸€æ¬¡ï¼Œæ‰€ä»¥å¯ä»¥åœ¨ä¸€ä¸ªæ–¹æ³•ä¸­å®šä¹‰å±€éƒ¨ç±»
     Timer t=new Timer(1000,listener);
     t.start();
 }
 
 2.
-ÄäÃûÄÚ²¿Àà
+åŒ¿åå†…éƒ¨ç±»
 
 public void start(int interval,final boolean beep)
 {
   ActionListener listener=new
-     ActionListener()//´´½¨Ò»¸öÊµÏÖActionListener½Ó¿ÚµÄÀà
+     ActionListener()//åˆ›å»ºä¸€ä¸ªå®ç°ActionListeneræ¥å£çš„ç±»
      {
-         public void actionPerformed(ActionEvent event)//ÊµÏÖactionPerformed·½·¨¶¨ÒåÔÚ{}ÄÚ
+         public void actionPerformed(ActionEvent event)//å®ç°actionPerformedæ–¹æ³•å®šä¹‰åœ¨{}å†…
             {
                Date now=new Date();
                System.out.println("At the tone ,the time is "+now);
                if(beep)Toolkit.getDefaultToolkit().beep();
              }
-       };//ÎªÊ²Ã´ĞèÒª¼Ó¡°£»¡±£¿
+       };//ä¸ºä»€ä¹ˆéœ€è¦åŠ â€œï¼›â€ï¼Ÿ
     Timer t=new Timer(1000,listener);
     t.start();
 }
 
-Óï·¨¸ñÊ½Îª£º
+è¯­æ³•æ ¼å¼ä¸ºï¼š
 
 new SuperType(construction paraneters)
 {
 inner class methods and data
 }
-ÆäÖĞ£¬SuperType¿ÉÒÔÊÇ½Ó¿Ú£¬ÄÚ²¿ÀàÊµÏÖ½Ó¿Ú¡£Ò²¿ÉÒÔÊÇÒ»¸öÀà£¬ÔòÄÚ²¿ÀàÀ©Õ¹Ëû¡£
+å…¶ä¸­ï¼ŒSuperTypeå¯ä»¥æ˜¯æ¥å£ï¼Œå†…éƒ¨ç±»å®ç°æ¥å£ã€‚ä¹Ÿå¯ä»¥æ˜¯ä¸€ä¸ªç±»ï¼Œåˆ™å†…éƒ¨ç±»æ‰©å±•ä»–ã€‚
 
 3.
 
-ÍêÕû³ÌĞò
+å®Œæ•´ç¨‹åº
 
 package w;
 
@@ -67,7 +67,7 @@ public class Time {
 public static void main(String[] args)
 {
 	TalkingClock clock=new TalkingClock();
-	clock.start(1000,true);//ÎªÊ²Ã´ÔÚÕâ¸³Öµ£¿
+	clock.start(1000,true);//ä¸ºä»€ä¹ˆåœ¨è¿™èµ‹å€¼ï¼Ÿ
 	JOptionPane.showMessageDialog(null, "quit?");
 	System.exit(0);
 }
@@ -78,9 +78,9 @@ class TalkingClock
 	public void start(int interval,final boolean beep)
 	{
 	  ActionListener listener=new
-	     ActionListener()//´´½¨Ò»¸öÊµÏÖActionListener½Ó¿ÚµÄÀà
+	     ActionListener()//åˆ›å»ºä¸€ä¸ªå®ç°ActionListeneræ¥å£çš„ç±»
 	     {
-	         public void actionPerformed(ActionEvent event)//ÊµÏÖactionPerformed·½·¨¶¨ÒåÔÚ{}ÄÚ
+	         public void actionPerformed(ActionEvent event)//å®ç°actionPerformedæ–¹æ³•å®šä¹‰åœ¨{}å†…
 	            {
 	               Date now=new Date();
 	               System.out.println("At the tone ,the time is "+now);
@@ -92,14 +92,14 @@ class TalkingClock
 	}
 }
 
-½á¹ûÈçÏÂ£º
+ç»“æœå¦‚ä¸‹ï¼š
 At the tone ,the time is Fri May 04 10:04:03 CST 2018
 At the tone ,the time is Fri May 04 10:04:04 CST 2018
 At the tone ,the time is Fri May 04 10:04:05 CST 2018
 
 4.
 
-¾²Ì¬ÄÚ²¿Àà
+é™æ€å†…éƒ¨ç±»
 
 package w;
 
@@ -109,7 +109,7 @@ public class Test2 {
 		double[]d=new double[20];
 		for(int i=0;i<d.length;i++)
 			d[i]=100*Math.random();
-		ArrayAlg.Pair p=ArrayAlg.minmax(d);//ÎªÁË¼õÉÙ³åÍ»£¬PairÀàÉèÖÃÎªArrayAlgÄÚ²¿¹«ÓĞÀà£¬ÓÃArrayAlg.Pair·ÃÎÊËû¡£
+		ArrayAlg.Pair p=ArrayAlg.minmax(d);//ä¸ºäº†å‡å°‘å†²çªï¼ŒPairç±»è®¾ç½®ä¸ºArrayAlgå†…éƒ¨å…¬æœ‰ç±»ï¼Œç”¨ArrayAlg.Pairè®¿é—®ä»–ã€‚
 		System.out.println("min="+p.getFirst());
 		System.out.println("max="+p.getSecond());
 	}
@@ -117,9 +117,9 @@ public class Test2 {
 }
 class ArrayAlg
 {
-	public static class Pair//¶¨ÒåÎªArrayAlgÄÚ²¿¹«ÓĞÀà¿ÉÒÔ½â¾öÍâ²¿¿ÉÄÜ´æÔÚµÄ³åÍ»£¬pair¶ÔÏóÖĞ²»ĞèÒªÒıÓÃÆäËûÈÎºÎ¶ÔÏó£¬¹ÊÄÚ²¿ÉùÃ÷Îªstatic.
+	public static class Pair//å®šä¹‰ä¸ºArrayAlgå†…éƒ¨å…¬æœ‰ç±»å¯ä»¥è§£å†³å¤–éƒ¨å¯èƒ½å­˜åœ¨çš„å†²çªï¼Œpairå¯¹è±¡ä¸­ä¸éœ€è¦å¼•ç”¨å…¶ä»–ä»»ä½•å¯¹è±¡ï¼Œæ•…å†…éƒ¨å£°æ˜ä¸ºstatic.
 	{
-		public Pair(double f,double s)//¶¨ÒåpairÀàÊÇÎªÁËºóÃæÍê³ÉÒ»´ÎÈ¡Á½¸öÖµµÄ·½·¨
+		public Pair(double f,double s)//å®šä¹‰pairç±»æ˜¯ä¸ºäº†åé¢å®Œæˆä¸€æ¬¡å–ä¸¤ä¸ªå€¼çš„æ–¹æ³•
 		{
 			first=f;
 			second=s;
@@ -136,7 +136,7 @@ class ArrayAlg
 		private double second;
 		
 	}
-	public static Pair minmax(double[] values)//¶¨ÒåPair minmaxÈ¡¼«´ó¼«Ğ¡ÖµµÄ·½·¨
+	public static Pair minmax(double[] values)//å®šä¹‰Pair minmaxå–æå¤§æå°å€¼çš„æ–¹æ³•
 	{
 		double min=Double.MAX_VALUE;
 		double max=Double.MIN_VALUE;
@@ -149,11 +149,43 @@ class ArrayAlg
 	}
 }
 
-½á¹ûÈçÏÂ£º
+ç»“æœå¦‚ä¸‹ï¼š
 min=8.812840870599647
 max=92.43143108007123
 
 5.
+
+ç®€å•æ¡†æ¶
+
+package w;
+import javax.swing.*;
+
+public class Try {
+	public static void main(String[] args)
+	{
+		SimpleFrame frame =new SimpleFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		
+	}
+
+}
+
+class SimpleFrame extends JFrame
+{
+	public SimpleFrame()
+	{
+		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+		
+	}
+	public static final int DEFAULT_WIDTH=300;
+	public static final int DEFAULT_HEIGHT=200;
+}
+
+
+
+
+
 
 
 
