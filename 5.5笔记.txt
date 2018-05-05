@@ -1,0 +1,292 @@
+1.
+实现webview控件设置，访问百度网址。
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.zhou.zhou">
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>
+
+MainActivity.java中设置：
+
+package com.example.zhou.zhou;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Used to load the 'native-lib' library on application startup.
+    static {
+        System.loadLibrary("native-lib");
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        WebView webView=(WebView) findViewById(R.id.web_view);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
+        webView.loadUrl("http://www.google.com");
+
+
+
+    }
+
+    /**
+     * A native method that is implemented by the 'native-lib' native library,
+     * which is packaged with this application.
+     */
+    public native String stringFromJNI();
+}
+
+activty_main.xml中设置：
+
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+
+
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+</android.support.constraint.ConstraintLayout>
+
+2.
+为数据库建表
+
+create table type(
+t_id varchar(12)primary key,//t_id 设为主键
+t_sname varchar(12))unique //t_sname设为unique
+insert into type(t_id,t_sname) values('too1','一号');
+insert into type(t_id,t_sname) values('too2','二号');
+insert into type(t_id,t_sname) values('too3','三号');
+insert into type(t_id,t_sname) values('too4','四号');
+//此表为设备表，设备型号与代号链接
+
+create table road(
+r_id varchar(12)primary key,//r_id 为主键，与type表链接
+ip number(12)unique )
+insert into type(r_id ,ip) values('too1',129.0.0.0);
+insert into type(r_id ,ip) values('too2',129.0.0.1);
+insert into type(r_id ,ip) values('too3',129.0.0.2);
+insert into type(r_id ,ip) values('too4',129.0.0.3);
+//此表将设备表与ip地址对应,此处ip为展示所用，实际情况取数据再考虑。
+
+
+create table details(
+d_sname  varchar2(12)unique ,//d_sname设为unique，与type表链接
+温度	number,
+湿度	number,
+风速	number
+)
+insert into details(d_sname,温度,湿度,风速) values('一号',1,2,3)；
+insert into details(d_sname,温度,湿度,风速) values('二号',1,2,3)；
+insert into details(d_sname,温度,湿度,风速) values('三号',1,2,3)；
+insert into details(d_sname,温度,湿度,风速) values('四号',1,2,3)；
+//各空调具体数据细节在此展现
+
+creat table extend(
+e.sname varchar2(12)unique ,//e.sname设为unique,与details链接
+else number
+)
+insert into details(e_sname,else) values('一号',1)；
+//设备拓展备注，后续。
+
+
+
+
+
+select type.id,type.t_sname,details.温度,details.湿度,details.风速
+from type,details
+where t_sname=d_sname //可看所有表信息
+
+3.
+一个居中于屏幕，大小为屏幕四分之一的窗口
+package w;
+import java.awt.*;
+import java.awt.event.*;//提示显示这个包没有使用
+import javax.swing.*;
+
+public class Fframe {
+	public static void main(String[] args)
+	{
+		CenteredFrame frame=new CenteredFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+}
+
+class CenteredFrame extends JFrame
+{
+	public CenteredFrame()
+	{
+		Toolkit kit=Toolkit.getDefaultToolkit();
+		Dimension screenSize=kit.getScreenSize();
+		int screenHeight=screenSize.height;
+		int screenWidth=screenSize.width;
+		
+		setSize(screenWidth/2,screenHeight/2);
+		setLocation(screenWidth/4,screenHeight/4);
+		
+		Image img =kit.getImage("icon.gif");/*这一段删掉没有影响，不删也没有任何图标变化，很难理解。
+		setIconImage(img);按理说此处是更改图标的语句。搜索不到相关信息。
+		setTitle("CenteredFrame");*/
+
+		
+				
+	}
+}
+
+4.
+package w;
+import java.awt.*;
+import javax.swing.*;
+
+public class Hello {
+	public static void main(String[] args)
+	{
+		HelloFrame frame=new HelloFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+}
+
+class HelloFrame extends JFrame
+{
+	public HelloFrame()
+	{
+		setTitle("hello");
+		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+		HelloPanel panel=new HelloPanel();
+		add(panel);			
+	}
+	public static final int DEFAULT_WIDTH=300;
+	public static final int DEFAULT_HEIGHT=200;
+	
+}
+
+class HelloPanel extends JPanel
+{
+public void paintComponent(Graphics g)
+{
+	super.paintComponent(g);
+	g.drawString("hello", MESSAGE_X, MESSAGE_Y);
+}
+public static final int MESSAGE_X=75;
+public static final int MESSAGE_Y=100;
+}
+
+5.
+
+绘制矩形与圆
+
+package w;
+import java.awt.*;
+import java.awt.geom.*;
+import javax.swing.*;
+
+public class Hello {
+	public static void main(String[] args)
+	{
+		HelloFrame frame=new HelloFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+}
+
+class HelloFrame extends JFrame
+{
+	public HelloFrame()
+	{
+		setTitle("hello");
+		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+		HelloPanel panel=new HelloPanel();
+		add(panel);			
+	}
+	public static final int DEFAULT_WIDTH=400;
+	public static final int DEFAULT_HEIGHT=400;
+	
+}
+
+class HelloPanel extends JPanel
+{
+public void paintComponent(Graphics g)
+{
+	super.paintComponent(g);
+	Graphics2D g2=(Graphics2D)g;
+	double leftX=100;
+	double topY=100;
+	double width=200;
+	double height=150;
+	
+	Rectangle2D rect=new Rectangle2D.Double(leftX, topY, width, height);
+	g2.draw(rect);
+	Ellipse2D ellipse=new Ellipse2D.Double();//外接矩形
+	ellipse.setFrame(rect);
+	g2.draw(ellipse);
+	g2.draw(new Line2D.Double(leftX, topY, leftX+width, topY+height));
+	double centerX=rect.getCenterX();
+	double centerY=rect.getCenterY();
+	double radius=150;
+	Ellipse2D circle=new Ellipse2D.Double();
+	circle.setFrameFromCenter(centerX, centerY, centerX+radius, centerY+radius);
+	g2.draw(circle);
+
+}
+public static final int MESSAGE_X=75;
+public static final int MESSAGE_Y=100;
+}
+
+6.
+填充图形颜色
+
+Rectangle2D rect=...;
+g2.setpaint(Color.RED);
+g2.fill(rect);
+//将draw 改成 fill就可以填充图形
+
+
+
+
+
+
+
