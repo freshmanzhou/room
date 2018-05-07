@@ -1,0 +1,455 @@
+1.
+图像显示程序
+
+package w;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import javax.imageio.*;
+import javax.swing.*;
+
+public class Image {
+	public static void main(String[] args)
+	{
+		ImageFrame frame=new ImageFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+}
+
+class ImageFrame extends JFrame
+{
+	public ImageFrame()
+	{
+		setTitle("hello");
+		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+		ImagePanel panel=new ImagePanel();
+		add(panel);			
+	}
+	public static final int DEFAULT_WIDTH=300;
+	public static final int DEFAULT_HEIGHT=200;
+	
+}
+
+class ImagePanel extends JPanel
+{
+	public ImagePanel()
+	{
+		try
+		{
+			image=ImageIO.read(new File("blue-ball.gif"));//找不到该图片，最终展示时并未发现该图片
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+public void paintComponent(Graphics g)
+{
+	super.paintComponent(g);
+    if(image==null)return;
+    int imageWidth=image.getWidth(this);//因为没有发现图片所以无法对其操作。
+    int imageHeight=image.getHeight(this);
+    
+    g.drawImage(image, 0,0,null);
+    
+    for(int i=0;i=imageWidth<=getWidth();i++)
+    	for(int j=0;j=imageHeight<=getHeight();j++)
+    		if(i+j>0)
+    			g.copyArea(0,0,imageWidth,imageHeight,i=imageWidth,j=imageHeight);
+	
+
+}
+public Image image;
+}
+尝试导入图片，导入后无法识别路径，查阅资料是绝对路径与相对路径的问题。
+
+2.
+按钮改变背景色
+package w;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+
+public class Button{
+	public static void main(String[] args)
+	{
+		ButtonFrame frame=new ButtonFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+}
+
+class ButtonFrame extends JFrame
+{
+	public ButtonFrame()
+	{
+		setTitle("hello");
+		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+		ButtonPanel panel=new ButtonPanel();
+		add(panel);			
+	}
+	public static final int DEFAULT_WIDTH=300;
+	public static final int DEFAULT_HEIGHT=200;
+	
+}
+
+class ButtonPanel extends JPanel
+{
+	public ButtonPanel()
+	{
+		JButton yellowButton=new JButton("Yellow");
+		JButton blueButton=new JButton("Blue");
+		JButton redButton=new JButton("Red");
+	
+	add(yellowButton);
+	add(blueButton);
+	add(redButton);
+	
+	ColorAction yellowAction=new ColorAction(Color.YELLOW);
+	ColorAction blueAction=new ColorAction(Color.BLUE);
+	ColorAction redAction=new ColorAction(Color.RED);
+	
+	yellowButton.addActionListener(yellowAction);
+    blueButton.addActionListener(blueAction);
+	redButton.addActionListener(redAction);
+	}
+private class ColorAction implements ActionListener
+{
+	public ColorAction(Color c)
+	{
+		backgroundColor=c;
+	}
+	public void actionPerformed(ActionEvent event)
+	{
+		setBackground(backgroundColor);
+	}
+	private Color backgroundColor;
+}
+}
+一开始总是运行失败，发现要额外导入import javax.swing.JFrame;
+import javax.swing.JPanel;才可以运行。声明私有private Color backgroundColor一开始也键入错误导致无法识别，后改正。
+
+3.
+简化上述程序
+void makeButton(String name,final Color backgroundColor)//前面是一步一步构造按钮，添加按钮，用颜色构造监听，添加监听
+{                                                       //这里是直接进行构造，所有的功能构造到位放在一起，因为都是属于同一个按钮功能。
+ JButton button=new JButton(name);
+ add(button);
+ button.addActionListener(new
+    ActionListener()
+{
+ public void actionPerformed(ActionEvent event)
+{
+setBackground(backgroundColor);
+}
+});//此处是一个匿名类：对按钮动作监听定义。上次不清楚为什么这里加;是对匿名类理解不深，现在稍微可以理解一些。
+}
+为了完整还要添加
+public ButtonPanel()
+{
+makeButton("yellow",Color.YELLOW);
+makeButton("blue",Color.BLUE);
+makeButton("red",Color.RED);
+}
+//和上面的定义对应。
+此处不需要显示的构造器是因为内部类机制将自动生成一个构造器，其中存储着所有用在内部类方法中的final局部变量。
+
+4.捕获窗口事件
+package w;
+
+
+import java.awt.BorderLayout;
+import java.awt.Frame;
+import java.awt.TextArea;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+public class Test extends Frame implements WindowListener {// 实现窗口事件监听接口
+	private TextArea textArea1 = new TextArea(6, 30);
+
+	public Test() {
+		super("窗口事件示例");
+		this.add(textArea1, BorderLayout.CENTER);
+		addWindowListener(this);// 向文本对象添加窗口事件监听
+		setSize(400, 300);
+		setVisible(true);
+
+	}
+
+	public static void main(String[] args) {
+		new Test();
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		textArea1.append("窗口被激活\n");// 窗口被激活时显示"窗口被激活"
+
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		System.exit(0);// 系统退出
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		textArea1.append("窗口失去焦点\n");// 窗口失去焦点时显示"窗口失去焦点"
+
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		textArea1.append("窗口还原\n");// 窗口还原时显示"窗口还原"
+
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		textArea1.append("窗口最小化\n");// 窗口最小化时显示"窗口最小化"
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		textArea1.append("窗口被打开\n");// 窗口被打开时显示"窗口被打开"
+	}
+
+}
+
+尝试自己增加事件捕捉，实现关掉窗口有提示
+package w;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.event.WindowEvent.*;
+import java.awt.event.WindowListener;
+
+
+public class Button{
+	public static void main(String[] args)
+	{
+		ButtonFrame frame=new ButtonFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+
+}
+
+class ButtonFrame extends JFrame
+{
+	public ButtonFrame()
+	{
+		setTitle("hello");
+		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+		ButtonPanel panel=new ButtonPanel();
+		add(panel);			
+	}
+	public static final int DEFAULT_WIDTH=300;
+	public static final int DEFAULT_HEIGHT=200;
+	
+}
+
+class ButtonPanel extends JPanel
+{
+	public ButtonPanel()
+	{
+		JButton yellowButton=new JButton("Yellow");
+		JButton blueButton=new JButton("Blue");
+		JButton redButton=new JButton("Red");
+	
+	add(yellowButton);
+	add(blueButton);
+	add(redButton);
+	
+	ColorAction yellowAction=new ColorAction(Color.YELLOW);
+	ColorAction blueAction=new ColorAction(Color.BLUE);
+	ColorAction redAction=new ColorAction(Color.RED);
+	
+	yellowButton.addActionListener(yellowAction);
+        blueButton.addActionListener(blueAction);
+	redButton.addActionListener(redAction);
+	}
+private class ColorAction implements ActionListener
+{
+	public ColorAction(Color c)
+	{
+		backgroundColor=c;
+	}
+	public void actionPerformed(ActionEvent event)
+	{
+		setBackground(backgroundColor);
+	}
+	private Color backgroundColor;
+}
+class Terminator extends WindowAdapter
+{
+	public void windowClosing(WindowEvent e)
+	{
+		System.exit(0);
+	}
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
+WindowListener listener=new Terminator();
+frame.addWindowListener(listener);//在frame.编译时出现无法识别“.”的错误,在网上搜索没有找到合适的答案?
+
+}
+
+5.
+捕获键盘事件，利用光标画图。
+
+package w;
+import java.awt.*;
+import java.awt.geom.*;
+import java.util.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Test {
+
+	public static void main(String[] args)
+	{
+		SketchFrame frame=new SketchFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+	}
+}
+class SketchFrame extends JFrame
+{
+	public SketchFrame()
+	{
+		setTitle("hello");
+		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+		SketchPanel panel=new SketchPanel();
+		add(panel);			
+	}
+	public static final int DEFAULT_WIDTH=300;
+	public static final int DEFAULT_HEIGHT=200;
+}
+class SketchPanel extends JPanel
+{
+	public SketchPanel()
+	{
+		last =new Point2D.Double(100,100);
+		lines=new ArrayList<Line2D>();
+		KeyHandler listener=new KeyHandler();
+		addKeyListener(listener);
+		setFocusable(true);
+	}
+	public void add(int dx,int dy)
+	{
+		Point2D end =new Point2D.Double(last.getX()+dx,last.getY()+dy);
+		Line2D line =new Line2D.Double(last,end);
+		lines.add(line);
+		repaint();
+		last=end;
+		
+	}
+	public void paintComponent(Graphics g)//绘画组件
+	{
+		super.paintComponent(g);
+		Graphics2D g2=(Graphics2D) g;
+		for(Line2D l:lines)//直线
+			g2.draw(l);
+	}
+	
+	private Point2D last;
+	private ArrayList<Line2D>lines;
+	
+	private  static final int SMALL_INCREMENT=1;//最小增量
+	private  static final int LARGE_INCREMENT=5;//最大增量
+	
+	private class KeyHandler implements KeyListener
+	{
+		public void keyPressed(KeyEvent event)//定义按下shift后反映
+		{
+		int keyCode=event.getKeyCode();//获取键盘数据，下面有一个同样的方法，考虑使用内部类重写一次，定义一个getKey类，下两种方法，getKey.Type,getKey.Pressed,回去尝试。
+		int d;
+		if(event.isShiftDown())
+			d=LARGE_INCREMENT;
+		else
+			d=SMALL_INCREMENT;
+		if (keyCode==KeyEvent.VK_LEFT) add(-d,0);
+		else if(keyCode==KeyEvent.VK_RIGHT) add(d,0);
+		else if(keyCode==KeyEvent.VK_UP) add(0,-d);
+		else if(keyCode==KeyEvent.VK_DOWN) add(0,d);
+	}
+	public void keyReleased(KeyEvent event) {}//释放检测
+	
+	public void keyTyped(KeyEvent event)
+	{
+		char keyChar=event.getKeyChar();//获取键盘数据
+		int d;
+		if(Character.isUpperCase(keyChar))
+		{
+			d=LARGE_INCREMENT;
+			keyChar=Character.toLowerCase(keyChar);
+		}
+		else
+			d=SMALL_INCREMENT;//定义用hjkl操作光标
+			if(keyChar=='h')add(-d,0);
+			else if(keyChar=='l')add(d,0);
+			else if(keyChar=='k')add(0,-d);
+			else if(keyChar=='j')add(0,d);
+	}
+	
+		
+	}
+}
+		
+	
+	
+	
+	
+
+
+
+
