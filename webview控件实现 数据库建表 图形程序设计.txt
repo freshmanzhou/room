@@ -1,5 +1,5 @@
 1.
-ÊµÏÖwebview¿Ø¼şÉèÖÃ£¬·ÃÎÊ°Ù¶ÈÍøÖ·¡£
+å®ç°webviewæ§ä»¶è®¾ç½®ï¼Œè®¿é—®ç™¾åº¦ç½‘å€ã€‚
 
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,7 +27,7 @@
 
 </manifest>
 
-MainActivity.javaÖĞÉèÖÃ£º
+MainActivity.javaä¸­è®¾ç½®ï¼š
 
 package com.example.zhou.zhou;
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     public native String stringFromJNI();
 }
 
-activty_main.xmlÖĞÉèÖÃ£º
+activty_main.xmlä¸­è®¾ç½®ï¼š
 
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -88,59 +88,59 @@ activty_main.xmlÖĞÉèÖÃ£º
 </android.support.constraint.ConstraintLayout>
 
 2.
-ÎªÊı¾İ¿â½¨±í
+ä¸ºæ•°æ®åº“å»ºè¡¨
 
 create table type(
-t_id varchar(12)primary key,//t_id ÉèÎªÖ÷¼ü
-t_sname varchar(12))unique //t_snameÉèÎªunique
-insert into type(t_id,t_sname) values('too1','Ò»ºÅ');
-insert into type(t_id,t_sname) values('too2','¶şºÅ');
-insert into type(t_id,t_sname) values('too3','ÈıºÅ');
-insert into type(t_id,t_sname) values('too4','ËÄºÅ');
-//´Ë±íÎªÉè±¸±í£¬Éè±¸ĞÍºÅÓë´úºÅÁ´½Ó
+t_id varchar(12)primary key,//t_id è®¾ä¸ºä¸»é”®
+t_sname varchar(12))unique //t_snameè®¾ä¸ºunique
+insert into type(t_id,t_sname) values('too1','ä¸€å·');
+insert into type(t_id,t_sname) values('too2','äºŒå·');
+insert into type(t_id,t_sname) values('too3','ä¸‰å·');
+insert into type(t_id,t_sname) values('too4','å››å·');
+//æ­¤è¡¨ä¸ºè®¾å¤‡è¡¨ï¼Œè®¾å¤‡å‹å·ä¸ä»£å·é“¾æ¥
 
 create table road(
-r_id varchar(12)primary key,//r_id ÎªÖ÷¼ü£¬Óëtype±íÁ´½Ó
+r_id varchar(12)primary key,//r_id ä¸ºä¸»é”®ï¼Œä¸typeè¡¨é“¾æ¥
 ip number(12)unique )
 insert into type(r_id ,ip) values('too1',129.0.0.0);
 insert into type(r_id ,ip) values('too2',129.0.0.1);
 insert into type(r_id ,ip) values('too3',129.0.0.2);
 insert into type(r_id ,ip) values('too4',129.0.0.3);
-//´Ë±í½«Éè±¸±íÓëipµØÖ·¶ÔÓ¦,´Ë´¦ipÎªÕ¹Ê¾ËùÓÃ£¬Êµ¼ÊÇé¿öÈ¡Êı¾İÔÙ¿¼ÂÇ¡£
+//æ­¤è¡¨å°†è®¾å¤‡è¡¨ä¸ipåœ°å€å¯¹åº”,æ­¤å¤„ipä¸ºå±•ç¤ºæ‰€ç”¨ï¼Œå®é™…æƒ…å†µå–æ•°æ®å†è€ƒè™‘ã€‚
 
 
 create table details(
-d_sname  varchar2(12)unique ,//d_snameÉèÎªunique£¬Óëtype±íÁ´½Ó
-ÎÂ¶È	number,
-Êª¶È	number,
-·çËÙ	number
+d_sname  varchar2(12)unique ,//d_snameè®¾ä¸ºuniqueï¼Œä¸typeè¡¨é“¾æ¥
+æ¸©åº¦	number,
+æ¹¿åº¦	number,
+é£é€Ÿ	number
 )
-insert into details(d_sname,ÎÂ¶È,Êª¶È,·çËÙ) values('Ò»ºÅ',1,2,3)£»
-insert into details(d_sname,ÎÂ¶È,Êª¶È,·çËÙ) values('¶şºÅ',1,2,3)£»
-insert into details(d_sname,ÎÂ¶È,Êª¶È,·çËÙ) values('ÈıºÅ',1,2,3)£»
-insert into details(d_sname,ÎÂ¶È,Êª¶È,·çËÙ) values('ËÄºÅ',1,2,3)£»
-//¸÷¿Õµ÷¾ßÌåÊı¾İÏ¸½ÚÔÚ´ËÕ¹ÏÖ
+insert into details(d_sname,æ¸©åº¦,æ¹¿åº¦,é£é€Ÿ) values('ä¸€å·',1,2,3)ï¼›
+insert into details(d_sname,æ¸©åº¦,æ¹¿åº¦,é£é€Ÿ) values('äºŒå·',1,2,3)ï¼›
+insert into details(d_sname,æ¸©åº¦,æ¹¿åº¦,é£é€Ÿ) values('ä¸‰å·',1,2,3)ï¼›
+insert into details(d_sname,æ¸©åº¦,æ¹¿åº¦,é£é€Ÿ) values('å››å·',1,2,3)ï¼›
+//å„ç©ºè°ƒå…·ä½“æ•°æ®ç»†èŠ‚åœ¨æ­¤å±•ç°
 
 creat table extend(
-e.sname varchar2(12)unique ,//e.snameÉèÎªunique,ÓëdetailsÁ´½Ó
+e.sname varchar2(12)unique ,//e.snameè®¾ä¸ºunique,ä¸detailsé“¾æ¥
 else number
 )
-insert into details(e_sname,else) values('Ò»ºÅ',1)£»
-//Éè±¸ÍØÕ¹±¸×¢£¬ºóĞø¡£
+insert into details(e_sname,else) values('ä¸€å·',1)ï¼›
+//è®¾å¤‡æ‹“å±•å¤‡æ³¨ï¼Œåç»­ã€‚
 
 
 
 
 
-select type.id,type.t_sname,details.ÎÂ¶È,details.Êª¶È,details.·çËÙ
+select type.id,type.t_sname,details.æ¸©åº¦,details.æ¹¿åº¦,details.é£é€Ÿ
 from type,details
-where t_sname=d_sname //¿É¿´ËùÓĞ±íĞÅÏ¢
+where t_sname=d_sname //å¯çœ‹æ‰€æœ‰è¡¨ä¿¡æ¯
 
 3.
-Ò»¸ö¾ÓÖĞÓÚÆÁÄ»£¬´óĞ¡ÎªÆÁÄ»ËÄ·ÖÖ®Ò»µÄ´°¿Ú
+ä¸€ä¸ªå±…ä¸­äºå±å¹•ï¼Œå¤§å°ä¸ºå±å¹•å››åˆ†ä¹‹ä¸€çš„çª—å£
 package w;
 import java.awt.*;
-import java.awt.event.*;//ÌáÊ¾ÏÔÊ¾Õâ¸ö°üÃ»ÓĞÊ¹ÓÃ
+import java.awt.event.*;//æç¤ºæ˜¾ç¤ºè¿™ä¸ªåŒ…æ²¡æœ‰ä½¿ç”¨
 import javax.swing.*;
 
 public class Fframe {
@@ -165,8 +165,8 @@ class CenteredFrame extends JFrame
 		setSize(screenWidth/2,screenHeight/2);
 		setLocation(screenWidth/4,screenHeight/4);
 		
-		Image img =kit.getImage("icon.gif");/*ÕâÒ»¶ÎÉ¾µôÃ»ÓĞÓ°Ïì£¬²»É¾Ò²Ã»ÓĞÈÎºÎÍ¼±ê±ä»¯£¬ºÜÄÑÀí½â¡£
-		setIconImage(img);°´ÀíËµ´Ë´¦ÊÇ¸ü¸ÄÍ¼±êµÄÓï¾ä¡£ËÑË÷²»µ½Ïà¹ØĞÅÏ¢¡£
+		Image img =kit.getImage("icon.gif");/*è¿™ä¸€æ®µåˆ æ‰æ²¡æœ‰å½±å“ï¼Œä¸åˆ ä¹Ÿæ²¡æœ‰ä»»ä½•å›¾æ ‡å˜åŒ–ï¼Œå¾ˆéš¾ç†è§£ã€‚
+		setIconImage(img);æŒ‰ç†è¯´æ­¤å¤„æ˜¯æ›´æ”¹å›¾æ ‡çš„è¯­å¥ã€‚æœç´¢ä¸åˆ°ç›¸å…³ä¿¡æ¯ã€‚
 		setTitle("CenteredFrame");*/
 
 		
@@ -216,7 +216,7 @@ public static final int MESSAGE_Y=100;
 
 5.
 
-»æÖÆ¾ØĞÎÓëÔ²
+ç»˜åˆ¶çŸ©å½¢ä¸åœ†
 
 package w;
 import java.awt.*;
@@ -260,7 +260,7 @@ public void paintComponent(Graphics g)
 	
 	Rectangle2D rect=new Rectangle2D.Double(leftX, topY, width, height);
 	g2.draw(rect);
-	Ellipse2D ellipse=new Ellipse2D.Double();//Íâ½Ó¾ØĞÎ
+	Ellipse2D ellipse=new Ellipse2D.Double();//å¤–æ¥çŸ©å½¢
 	ellipse.setFrame(rect);
 	g2.draw(ellipse);
 	g2.draw(new Line2D.Double(leftX, topY, leftX+width, topY+height));
@@ -277,12 +277,12 @@ public static final int MESSAGE_Y=100;
 }
 
 6.
-Ìî³äÍ¼ĞÎÑÕÉ«
+å¡«å……å›¾å½¢é¢œè‰²
 
 Rectangle2D rect=...;
 g2.setpaint(Color.RED);
 g2.fill(rect);
-//½«draw ¸Ä³É fill¾Í¿ÉÒÔÌî³äÍ¼ĞÎ
+//å°†draw æ”¹æˆ fillå°±å¯ä»¥å¡«å……å›¾å½¢
 
 
 
