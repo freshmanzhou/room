@@ -13,13 +13,13 @@ public class Test{
 	
 		Arrays.sort(staff);
 	
-	for(Employee e : staff)//foreach ±éÀúÑ­»·
+	for(Employee e : staff)//foreach éå†å¾ªç¯
 		System.out.println("name="+e.getName()+",salary="+e.getSalary());
 	
 	}
 
 }
-class Employee implements Comparable<Employee>//Ê¹ÓÃ¹Ø¼ü×Ö implementsÊµÏÖ½Ó¿Ú
+class Employee implements Comparable<Employee>//ä½¿ç”¨å…³é”®å­— implementså®ç°æ¥å£
 {
 	public Employee(String n,double s)
 	{
@@ -41,23 +41,23 @@ class Employee implements Comparable<Employee>//Ê¹ÓÃ¹Ø¼ü×Ö implementsÊµÏÖ½Ó¿Ú
 		double raise =salary*byPercent/100;
 		salary+=raise;
 	}*/
-	public int compareTo(Employee other)//ÊµÏÖArrays.sort(staff)ÅÅĞòµÄ·½·¨£¬compareTo·½·¨×÷Îª²ÎÊıÃû³Æ±È½Ï¡°this¡±Óë¡°other¡±
+	public int compareTo(Employee other)//å®ç°Arrays.sort(staff)æ’åºçš„æ–¹æ³•ï¼ŒcompareToæ–¹æ³•ä½œä¸ºå‚æ•°åç§°æ¯”è¾ƒâ€œthisâ€ä¸â€œotherâ€
    {
-	if(salary<other.salary)return -3;// Ğ¡ÓÚotherÖµ,·µ»ØÖµÎª¸ºÕûÊı
-	if(salary>other.salary)return 3;//´óÓÚotherÖµ£¬·µ»ØÖµÎªÕıÕûÊı
-	return 0;//ÏàµÈÊ±·µ»Ø0Öµ
+	if(salary<other.salary)return -3;// å°äºotherå€¼,è¿”å›å€¼ä¸ºè´Ÿæ•´æ•°
+	if(salary>other.salary)return 3;//å¤§äºotherå€¼ï¼Œè¿”å›å€¼ä¸ºæ­£æ•´æ•°
+	return 0;//ç›¸ç­‰æ—¶è¿”å›0å€¼
    }
 	private String name;
 	private double salary;
 }
-/* ExtendsÓëimplements µÄÇø±ğÔÚÓÚ£ºExtends¿ÉÒÔÀí½âÎªÈ«ÅÌ¼Ì³ĞÁË¸¸ÀàµÄ¹¦ÄÜ¡£implements¿ÉÒÔÀí½âÎªÎªÕâ¸öÀà¸½¼ÓÒ»Ğ©¶îÍâµÄ¹¦ÄÜ£»interface¶¨ÒåÒ»Ğ©·½·¨,²¢Ã»ÓĞÊµÏÖ,ĞèÒªimplementsÀ´ÊµÏÖ²Å¿ÉÓÃ¡£extend¿ÉÒÔ¼Ì³ĞÒ»¸ö½Ó¿Ú,µ«ÈÔÊÇÒ»¸ö½Ó¿Ú,Ò²ĞèÒªimplementsÖ®ºó²Å¿ÉÓÃ¡£¶ÔÓÚclass¶øÑÔ£¬ExtendsÓÃÓÚ(µ¥)¼Ì³ĞÒ»¸öÀà£¨class£©£¬¶øimplementsÓÃÓÚÊµÏÖÒ»¸ö½Ó¿Ú(interface)¡£*/
+/* Extendsä¸implements çš„åŒºåˆ«åœ¨äºï¼šExtendså¯ä»¥ç†è§£ä¸ºå…¨ç›˜ç»§æ‰¿äº†çˆ¶ç±»çš„åŠŸèƒ½ã€‚implementså¯ä»¥ç†è§£ä¸ºä¸ºè¿™ä¸ªç±»é™„åŠ ä¸€äº›é¢å¤–çš„åŠŸèƒ½ï¼›interfaceå®šä¹‰ä¸€äº›æ–¹æ³•,å¹¶æ²¡æœ‰å®ç°,éœ€è¦implementsæ¥å®ç°æ‰å¯ç”¨ã€‚extendå¯ä»¥ç»§æ‰¿ä¸€ä¸ªæ¥å£,ä½†ä»æ˜¯ä¸€ä¸ªæ¥å£,ä¹Ÿéœ€è¦implementsä¹‹åæ‰å¯ç”¨ã€‚å¯¹äºclassè€Œè¨€ï¼ŒExtendsç”¨äº(å•)ç»§æ‰¿ä¸€ä¸ªç±»ï¼ˆclassï¼‰ï¼Œè€Œimplementsç”¨äºå®ç°ä¸€ä¸ªæ¥å£(interface)ã€‚*/
 
 2.
-½Ó¿Ú²»ÊÇÀà£¬µ«ÊÇ¿ÉÒÔÉùÃ÷½Ó¿Ú±äÁ¿
-ÀıÈç£º
+æ¥å£ä¸æ˜¯ç±»ï¼Œä½†æ˜¯å¯ä»¥å£°æ˜æ¥å£å˜é‡
+ä¾‹å¦‚ï¼š
 Comparable x;
-½Ó¿Ú±äÁ¿±ØĞëÒıÓÃÊµÏÖÁË½Ó¿ÚµÄÀà¶ÔÏó
-ÀıÈç£º
+æ¥å£å˜é‡å¿…é¡»å¼•ç”¨å®ç°äº†æ¥å£çš„ç±»å¯¹è±¡
+ä¾‹å¦‚ï¼š
 x=new Employee(...);
 
 3.
@@ -67,35 +67,35 @@ import java.util.*;
 public class Test{
 	public static void main(String[] args)
 	{
-		try//Í¨¹ıtry catch ²¶»ñÒì³£¡£
+		try//é€šè¿‡try catch æ•è·å¼‚å¸¸ã€‚
 		{
 			Employee original=new Employee("John ",50000);
 			original.setHireDay(2000,1,1);
 			Employee copy =original.clone();
-			copy.raiseSalary(10);//¸Ä±ä¹¤×Ê
-			copy.setHireDay(2002,12,31);//¸Ä±äÈëÖ°Ê±¼ä
-			System.out.println("original="+original);//ÏÔÊ¾Ô­Êı¾İ£¬ÒòÎªÉî¿½±´£¬Ô­¶ÔÏóÎ´·¢Éú¸Ä±ä
-			System.out.println("copy="+copy);//ÏÔÊ¾¸´ÖÆºó¸Ä¹ıµÄÊı¾İ
+			copy.raiseSalary(10);//æ”¹å˜å·¥èµ„
+			copy.setHireDay(2002,12,31);//æ”¹å˜å…¥èŒæ—¶é—´
+			System.out.println("original="+original);//æ˜¾ç¤ºåŸæ•°æ®ï¼Œå› ä¸ºæ·±æ‹·è´ï¼ŒåŸå¯¹è±¡æœªå‘ç”Ÿæ”¹å˜
+			System.out.println("copy="+copy);//æ˜¾ç¤ºå¤åˆ¶åæ”¹è¿‡çš„æ•°æ®
 		}
 		catch(CloneNotSupportedException e)
 		{
-			e.printStackTrace();//ÔÚÃüÁîĞĞ´òÓ¡Òì³£ĞÅÏ¢ÔÚ³ÌĞòÖĞ³ö´íµÄÎ»ÖÃ¼°Ô­Òò¡£
+			e.printStackTrace();//åœ¨å‘½ä»¤è¡Œæ‰“å°å¼‚å¸¸ä¿¡æ¯åœ¨ç¨‹åºä¸­å‡ºé”™çš„ä½ç½®åŠåŸå› ã€‚
 		}
 	}
 		
 }
 
-class Employee implements Cloneable//ÊµÏÖcloneable½Ó¿Ú
+class Employee implements Cloneable//å®ç°cloneableæ¥å£
 {
 	public Employee(String n,double s)
 	{
 		name=n;
 		salary=s;
 	}
-	public Employee clone()throws CloneNotSupportedException//ÉùÃ÷Òì³£
+	public Employee clone()throws CloneNotSupportedException//å£°æ˜å¼‚å¸¸
 	{
-		Employee cloned=(Employee)super.clone();/*¿ËÂ¡ËùÓĞ¿É±äµÄÊµÀıÓò£¬
-		cloned.hireDay=(Date)hireDay.clone();          Ê¹ÓÃclone()ÊµÏÖÉî¿ËÂ¡*/
+		Employee cloned=(Employee)super.clone();/*å…‹éš†æ‰€æœ‰å¯å˜çš„å®ä¾‹åŸŸï¼Œ
+		cloned.hireDay=(Date)hireDay.clone();          ä½¿ç”¨clone()å®ç°æ·±å…‹éš†*/
 		return cloned;
 	}
 	
@@ -119,18 +119,18 @@ private String name;
 private double salary;
 private Date hireDay;
 }
-½á¹ûÈçÏÂ£º
+ç»“æœå¦‚ä¸‹ï¼š
 original=Employee[name=John ,salary=50000.0,hiredaySat Jan 01 00:00:00 CST 2000]
 copy=Employee[name=John ,salary=55000.0,hiredayTue Dec 31 00:00:00 CST 2002]
 
  
- /*¿ËÂ¡¾ÍÊÇ¸´ÖÆÒ»¸ö¶ÔÏóµÄ¸´±¾.µ«Ò»¸ö¶ÔÏóÖĞ¿ÉÄÜÓĞ»ù±¾Êı¾İÀàĞÍ,Èç:int,long,floatµÈ,Ò²Í¬Ê±º¬ÓĞ¶ÔÏóÊı¾İÀàĞÍÈç(Êı×é,¼¯ºÏµÈ)¡£±»¿ËÂ¡µÃµ½µÄ¶ÔÏó»ù±¾ÀàĞÍµÄÖµĞŞ¸ÄÁË,Ô­¶ÔÏóµÄÖµ²»»á¸Ä±ä.ÕâÖÖÊÊºÏshadow clone(Ç³¿ËÂ¡).
+ /*å…‹éš†å°±æ˜¯å¤åˆ¶ä¸€ä¸ªå¯¹è±¡çš„å¤æœ¬.ä½†ä¸€ä¸ªå¯¹è±¡ä¸­å¯èƒ½æœ‰åŸºæœ¬æ•°æ®ç±»å‹,å¦‚:int,long,floatç­‰,ä¹ŸåŒæ—¶å«æœ‰å¯¹è±¡æ•°æ®ç±»å‹å¦‚(æ•°ç»„,é›†åˆç­‰)ã€‚è¢«å…‹éš†å¾—åˆ°çš„å¯¹è±¡åŸºæœ¬ç±»å‹çš„å€¼ä¿®æ”¹äº†,åŸå¯¹è±¡çš„å€¼ä¸ä¼šæ”¹å˜.è¿™ç§é€‚åˆshadow clone(æµ…å…‹éš†).
 
-   µ«Èç¹ûÄãÒª¸Ä±äÒ»¸ö·Ç»ù±¾ÀàĞÍµÄÖµÊ±,Ô­¶ÔÏóµÄÖµÈ´¸Ä±äÁË,.±ÈÈçÒ»¸öÊı×é,ÄÚ´æÖĞÖ»copyËûµÄµØÖ·,¶øÕâ¸öµØÖ·Ö¸ÏòµÄÖµ²¢Ã»ÓĞ copy,µ±cloneÊ±,Á½¸öµØÖ·Ö¸ÏòÁËÒ»¸öÖµ,ÕâÑùÒ»µ©Õâ¸öÖµ¸Ä±äÁË,Ô­À´µÄÖµµ±È»Ò²±äÁË,ÒòÎªËûÃÇ¹²ÓÃÒ»¸öÖµ.,Õâ¾Í±ØĞëµÃÓÃÉî¿ËÂ¡(deep clone)*/
+   ä½†å¦‚æœä½ è¦æ”¹å˜ä¸€ä¸ªéåŸºæœ¬ç±»å‹çš„å€¼æ—¶,åŸå¯¹è±¡çš„å€¼å´æ”¹å˜äº†,.æ¯”å¦‚ä¸€ä¸ªæ•°ç»„,å†…å­˜ä¸­åªcopyä»–çš„åœ°å€,è€Œè¿™ä¸ªåœ°å€æŒ‡å‘çš„å€¼å¹¶æ²¡æœ‰ copy,å½“cloneæ—¶,ä¸¤ä¸ªåœ°å€æŒ‡å‘äº†ä¸€ä¸ªå€¼,è¿™æ ·ä¸€æ—¦è¿™ä¸ªå€¼æ”¹å˜äº†,åŸæ¥çš„å€¼å½“ç„¶ä¹Ÿå˜äº†,å› ä¸ºä»–ä»¬å…±ç”¨ä¸€ä¸ªå€¼.,è¿™å°±å¿…é¡»å¾—ç”¨æ·±å…‹éš†(deep clone)*/
 
 4.
 
-//ĞòÁĞ»¯ÊµÏÖ¶ÔÏóµÄ¿½±´£¬Ô­ÀíÊÇ½«Ä¸¶ÔÏóĞ´µ½×Ö½ÚÁ÷ÖĞ£¬ÔÙ´Ó×Ö½ÚÁ÷¶Á³ö»ñµÃĞÂ¶ÔÏó£¬ÕâÑù±ÜÃâÁËÒıÓÃ¹²ÏíµÄÎÊÌâÊµÏÖÉî¿½±´£¬È±µãÊÇĞ§ÂÊ½ÏµÍ¡£
+//åºåˆ—åŒ–å®ç°å¯¹è±¡çš„æ‹·è´ï¼ŒåŸç†æ˜¯å°†æ¯å¯¹è±¡å†™åˆ°å­—èŠ‚æµä¸­ï¼Œå†ä»å­—èŠ‚æµè¯»å‡ºè·å¾—æ–°å¯¹è±¡ï¼Œè¿™æ ·é¿å…äº†å¼•ç”¨å…±äº«çš„é—®é¢˜å®ç°æ·±æ‹·è´ï¼Œç¼ºç‚¹æ˜¯æ•ˆç‡è¾ƒä½ã€‚
 
 package w;
 import java.io.Serializable;
@@ -157,7 +157,7 @@ public class Test{
 		
 }
 
-class Employee implements Serializable//Ê¹ÓÃ¸Ã¹¤¾ßÀàµÄ¶ÔÏóÖ»ÒªÊµÏÖSerializable½Ó¿Ú¾Í¿ÉÊµÏÖ¶ÔÏóµÄ¿ËÂ¡£¬ÎŞĞë¼Ì³ĞCloneable½Ó¿ÚÊµÏÖclone()·½·¨¡£
+class Employee implements Serializable//ä½¿ç”¨è¯¥å·¥å…·ç±»çš„å¯¹è±¡åªè¦å®ç°Serializableæ¥å£å°±å¯å®ç°å¯¹è±¡çš„å…‹éš†ï¼Œæ— é¡»ç»§æ‰¿Cloneableæ¥å£å®ç°clone()æ–¹æ³•ã€‚
 {
 	public Employee(String n,double s)
 	{
@@ -190,7 +190,7 @@ public class CloneUtils {//
 	public static <T extends Serializable> T clone(T obj)
 	{
 		T cloneObj=null;
-		try//ÊµÏÖ½«Ä¸¶ÔÏó×ª»¯ÎªÊäÈëÊä³ö×Ö½ÚÁ÷£¬´Ó¶ø²úÉúÓëÄ¸¶ÔÏóÎŞ¹ØµÄĞÂ¶ÔÏó
+		try//å®ç°å°†æ¯å¯¹è±¡è½¬åŒ–ä¸ºè¾“å…¥è¾“å‡ºå­—èŠ‚æµï¼Œä»è€Œäº§ç”Ÿä¸æ¯å¯¹è±¡æ— å…³çš„æ–°å¯¹è±¡
 		{
 			ByteArrayOutputStream out=new ByteArrayOutputStream();
 			ObjectOutputStream obs=new ObjectOutputStream(out);
@@ -210,12 +210,12 @@ public class CloneUtils {//
 	}
 
 }
-½á¹ûÈçÏÂ£º
+ç»“æœå¦‚ä¸‹ï¼š
 original=Employee[name=John ,salary=50000.0,hiredaySat Jan 01 00:00:00 CST 2000]
 copy=Employee[name=John ,salary=55000.0,hiredayTue Dec 31 00:00:00 CST 2002]
 
 
-5¡£Í¨¹ı¼ÆÊ±Æ÷£¬ÔÚ¸ø¶¨µÄÊ®ÃëÄÚ·¢³öÍ¨¸æ¡£
+5ã€‚é€šè¿‡è®¡æ—¶å™¨ï¼Œåœ¨ç»™å®šçš„åç§’å†…å‘å‡ºé€šå‘Šã€‚
 package w;
 
 
@@ -236,9 +236,9 @@ public class Time {
 public static void main(String[] args)
 {
 	ActionListener listener=new TimePrinter();
-	Timer t=new Timer(10000,listener);//ÉèÖÃÊ±¼ä
+	Timer t=new Timer(10000,listener);//è®¾ç½®æ—¶é—´
 	t.start();
-	JOptionPane.showMessageDialog(null, "quit?");//ÍË³öÍ¨Öª
+	JOptionPane.showMessageDialog(null, "quit?");//é€€å‡ºé€šçŸ¥
 	System.exit(0);
 }
 }
@@ -248,14 +248,14 @@ class TimePrinter implements ActionListener
 	public void actionPerformed(ActionEvent event)
 	{
 		Date now=new Date();
-		System.out.println("At the tone,the time is"+now);//¸ø³öµ±Ç°Ê±¼ä
-		Toolkit.getDefaultToolkit().beep();//·¢³öÏìÉù
+		System.out.println("At the tone,the time is"+now);//ç»™å‡ºå½“å‰æ—¶é—´
+		Toolkit.getDefaultToolkit().beep();//å‘å‡ºå“å£°
 		}
 }
 
 6.
-/*Èç¹ûÓĞÒ»¸öTimePrinterÀàÊÇÒ»¸ö³£¹æÀà£¬ËüÍ¨¹ıTalkingClockÀàµÄ¹«ÓĞ·½Ê½·ÃÎÊbeep±êÖ¾£¬
-¶øÊ¹ÄÚ²¿Àà¿ÉÒÔ¸øÓè¸Ä½ø£¬¼´²»±ØÌá¹©½öÓÃÓÚ·ÃÎÊÆäËûÀàµÄ·ÃÎÊÆ÷¡£*/
+/*å¦‚æœæœ‰ä¸€ä¸ªTimePrinterç±»æ˜¯ä¸€ä¸ªå¸¸è§„ç±»ï¼Œå®ƒé€šè¿‡TalkingClockç±»çš„å…¬æœ‰æ–¹å¼è®¿é—®beepæ ‡å¿—ï¼Œ
+è€Œä½¿å†…éƒ¨ç±»å¯ä»¥ç»™äºˆæ”¹è¿›ï¼Œå³ä¸å¿…æä¾›ä»…ç”¨äºè®¿é—®å…¶ä»–ç±»çš„è®¿é—®å™¨ã€‚*/
 
 package w;
 
@@ -309,7 +309,7 @@ class TalkingClock
 		}
 	}
 }
-½á¹ûÈçÏÂ£º
+ç»“æœå¦‚ä¸‹ï¼š
 At the tone,the time isThu May 03 16:52:05 CST 2018
 At the tone,the time isThu May 03 16:52:06 CST 2018
 At the tone,the time isThu May 03 16:52:07 CST 2018
