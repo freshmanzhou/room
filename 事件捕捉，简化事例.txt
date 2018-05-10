@@ -1,5 +1,5 @@
 1.
-Í¼ÏñÏÔÊ¾³ÌĞò
+å›¾åƒæ˜¾ç¤ºç¨‹åº
 
 package w;
 import java.awt.*;
@@ -38,7 +38,7 @@ class ImagePanel extends JPanel
 	{
 		try
 		{
-			image=ImageIO.read(new File("blue-ball.gif"));//ÕÒ²»µ½¸ÃÍ¼Æ¬£¬×îÖÕÕ¹Ê¾Ê±²¢Î´·¢ÏÖ¸ÃÍ¼Æ¬
+			image=ImageIO.read(new File("blue-ball.gif"));//æ‰¾ä¸åˆ°è¯¥å›¾ç‰‡ï¼Œæœ€ç»ˆå±•ç¤ºæ—¶å¹¶æœªå‘ç°è¯¥å›¾ç‰‡
 		}
 		catch(IOException e)
 		{
@@ -49,7 +49,7 @@ public void paintComponent(Graphics g)
 {
 	super.paintComponent(g);
     if(image==null)return;
-    int imageWidth=image.getWidth(this);//ÒòÎªÃ»ÓĞ·¢ÏÖÍ¼Æ¬ËùÒÔÎŞ·¨¶ÔÆä²Ù×÷¡£
+    int imageWidth=image.getWidth(this);//å› ä¸ºæ²¡æœ‰å‘ç°å›¾ç‰‡æ‰€ä»¥æ— æ³•å¯¹å…¶æ“ä½œã€‚
     int imageHeight=image.getHeight(this);
     
     g.drawImage(image, 0,0,null);
@@ -63,10 +63,10 @@ public void paintComponent(Graphics g)
 }
 public Image image;
 }
-³¢ÊÔµ¼ÈëÍ¼Æ¬£¬µ¼ÈëºóÎŞ·¨Ê¶±ğÂ·¾¶£¬²éÔÄ×ÊÁÏÊÇ¾ø¶ÔÂ·¾¶ÓëÏà¶ÔÂ·¾¶µÄÎÊÌâ¡£
+å°è¯•å¯¼å…¥å›¾ç‰‡ï¼Œå¯¼å…¥åæ— æ³•è¯†åˆ«è·¯å¾„ï¼ŒæŸ¥é˜…èµ„æ–™æ˜¯ç»å¯¹è·¯å¾„ä¸ç›¸å¯¹è·¯å¾„çš„é—®é¢˜ã€‚
 
 2.
-°´Å¥¸Ä±ä±³¾°É«
+æŒ‰é’®æ”¹å˜èƒŒæ™¯è‰²
 package w;
 import java.awt.*;
 import java.awt.event.*;
@@ -133,13 +133,13 @@ private class ColorAction implements ActionListener
 	private Color backgroundColor;
 }
 }
-Ò»¿ªÊ¼×ÜÊÇÔËĞĞÊ§°Ü£¬·¢ÏÖÒª¶îÍâµ¼Èëimport javax.swing.JFrame;
-import javax.swing.JPanel;²Å¿ÉÒÔÔËĞĞ¡£ÉùÃ÷Ë½ÓĞprivate Color backgroundColorÒ»¿ªÊ¼Ò²¼üÈë´íÎóµ¼ÖÂÎŞ·¨Ê¶±ğ£¬ºó¸ÄÕı¡£
+ä¸€å¼€å§‹æ€»æ˜¯è¿è¡Œå¤±è´¥ï¼Œå‘ç°è¦é¢å¤–å¯¼å…¥import javax.swing.JFrame;
+import javax.swing.JPanel;æ‰å¯ä»¥è¿è¡Œã€‚å£°æ˜ç§æœ‰private Color backgroundColorä¸€å¼€å§‹ä¹Ÿé”®å…¥é”™è¯¯å¯¼è‡´æ— æ³•è¯†åˆ«ï¼Œåæ”¹æ­£ã€‚
 
 3.
-¼ò»¯ÉÏÊö³ÌĞò
-void makeButton(String name,final Color backgroundColor)//Ç°ÃæÊÇÒ»²½Ò»²½¹¹Ôì°´Å¥£¬Ìí¼Ó°´Å¥£¬ÓÃÑÕÉ«¹¹Ôì¼àÌı£¬Ìí¼Ó¼àÌı
-{                                                       //ÕâÀïÊÇÖ±½Ó½øĞĞ¹¹Ôì£¬ËùÓĞµÄ¹¦ÄÜ¹¹Ôìµ½Î»·ÅÔÚÒ»Æğ£¬ÒòÎª¶¼ÊÇÊôÓÚÍ¬Ò»¸ö°´Å¥¹¦ÄÜ¡£
+ç®€åŒ–ä¸Šè¿°ç¨‹åº
+void makeButton(String name,final Color backgroundColor)//å‰é¢æ˜¯ä¸€æ­¥ä¸€æ­¥æ„é€ æŒ‰é’®ï¼Œæ·»åŠ æŒ‰é’®ï¼Œç”¨é¢œè‰²æ„é€ ç›‘å¬ï¼Œæ·»åŠ ç›‘å¬
+{                                                       //è¿™é‡Œæ˜¯ç›´æ¥è¿›è¡Œæ„é€ ï¼Œæ‰€æœ‰çš„åŠŸèƒ½æ„é€ åˆ°ä½æ”¾åœ¨ä¸€èµ·ï¼Œå› ä¸ºéƒ½æ˜¯å±äºåŒä¸€ä¸ªæŒ‰é’®åŠŸèƒ½ã€‚
  JButton button=new JButton(name);
  add(button);
  button.addActionListener(new
@@ -149,19 +149,19 @@ void makeButton(String name,final Color backgroundColor)//Ç°ÃæÊÇÒ»²½Ò»²½¹¹Ôì°´Å¥
 {
 setBackground(backgroundColor);
 }
-});//´Ë´¦ÊÇÒ»¸öÄäÃûÀà£º¶Ô°´Å¥¶¯×÷¼àÌı¶¨Òå¡£ÉÏ´Î²»Çå³şÎªÊ²Ã´ÕâÀï¼Ó;ÊÇ¶ÔÄäÃûÀàÀí½â²»Éî£¬ÏÖÔÚÉÔÎ¢¿ÉÒÔÀí½âÒ»Ğ©¡£
+});//æ­¤å¤„æ˜¯ä¸€ä¸ªåŒ¿åç±»ï¼šå¯¹æŒ‰é’®åŠ¨ä½œç›‘å¬å®šä¹‰ã€‚ä¸Šæ¬¡ä¸æ¸…æ¥šä¸ºä»€ä¹ˆè¿™é‡ŒåŠ ;æ˜¯å¯¹åŒ¿åç±»ç†è§£ä¸æ·±ï¼Œç°åœ¨ç¨å¾®å¯ä»¥ç†è§£ä¸€äº›ã€‚
 }
-ÎªÁËÍêÕû»¹ÒªÌí¼Ó
+ä¸ºäº†å®Œæ•´è¿˜è¦æ·»åŠ 
 public ButtonPanel()
 {
 makeButton("yellow",Color.YELLOW);
 makeButton("blue",Color.BLUE);
 makeButton("red",Color.RED);
 }
-//ºÍÉÏÃæµÄ¶¨Òå¶ÔÓ¦¡£
-´Ë´¦²»ĞèÒªÏÔÊ¾µÄ¹¹ÔìÆ÷ÊÇÒòÎªÄÚ²¿Àà»úÖÆ½«×Ô¶¯Éú³ÉÒ»¸ö¹¹ÔìÆ÷£¬ÆäÖĞ´æ´¢×ÅËùÓĞÓÃÔÚÄÚ²¿Àà·½·¨ÖĞµÄfinal¾Ö²¿±äÁ¿¡£
+//å’Œä¸Šé¢çš„å®šä¹‰å¯¹åº”ã€‚
+æ­¤å¤„ä¸éœ€è¦æ˜¾ç¤ºçš„æ„é€ å™¨æ˜¯å› ä¸ºå†…éƒ¨ç±»æœºåˆ¶å°†è‡ªåŠ¨ç”Ÿæˆä¸€ä¸ªæ„é€ å™¨ï¼Œå…¶ä¸­å­˜å‚¨ç€æ‰€æœ‰ç”¨åœ¨å†…éƒ¨ç±»æ–¹æ³•ä¸­çš„finalå±€éƒ¨å˜é‡ã€‚
 
-4.²¶»ñ´°¿ÚÊÂ¼ş
+4.æ•è·çª—å£äº‹ä»¶
 package w;
 
 
@@ -171,13 +171,13 @@ import java.awt.TextArea;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class Test extends Frame implements WindowListener {// ÊµÏÖ´°¿ÚÊÂ¼ş¼àÌı½Ó¿Ú
+public class Test extends Frame implements WindowListener {// å®ç°çª—å£äº‹ä»¶ç›‘å¬æ¥å£
 	private TextArea textArea1 = new TextArea(6, 30);
 
 	public Test() {
-		super("´°¿ÚÊÂ¼şÊ¾Àı");
+		super("çª—å£äº‹ä»¶ç¤ºä¾‹");
 		this.add(textArea1, BorderLayout.CENTER);
-		addWindowListener(this);// ÏòÎÄ±¾¶ÔÏóÌí¼Ó´°¿ÚÊÂ¼ş¼àÌı
+		addWindowListener(this);// å‘æ–‡æœ¬å¯¹è±¡æ·»åŠ çª—å£äº‹ä»¶ç›‘å¬
 		setSize(400, 300);
 		setVisible(true);
 
@@ -189,7 +189,7 @@ public class Test extends Frame implements WindowListener {// ÊµÏÖ´°¿ÚÊÂ¼ş¼àÌı½Ó
 
 	@Override
 	public void windowActivated(WindowEvent e) {
-		textArea1.append("´°¿Ú±»¼¤»î\n");// ´°¿Ú±»¼¤»îÊ±ÏÔÊ¾"´°¿Ú±»¼¤»î"
+		textArea1.append("çª—å£è¢«æ¿€æ´»\n");// çª—å£è¢«æ¿€æ´»æ—¶æ˜¾ç¤º"çª—å£è¢«æ¿€æ´»"
 
 	}
 
@@ -199,34 +199,34 @@ public class Test extends Frame implements WindowListener {// ÊµÏÖ´°¿ÚÊÂ¼ş¼àÌı½Ó
 
 	@Override
 	public void windowClosing(WindowEvent e) {
-		System.exit(0);// ÏµÍ³ÍË³ö
+		System.exit(0);// ç³»ç»Ÿé€€å‡º
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {
-		textArea1.append("´°¿ÚÊ§È¥½¹µã\n");// ´°¿ÚÊ§È¥½¹µãÊ±ÏÔÊ¾"´°¿ÚÊ§È¥½¹µã"
+		textArea1.append("çª—å£å¤±å»ç„¦ç‚¹\n");// çª—å£å¤±å»ç„¦ç‚¹æ—¶æ˜¾ç¤º"çª—å£å¤±å»ç„¦ç‚¹"
 
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e) {
-		textArea1.append("´°¿Ú»¹Ô­\n");// ´°¿Ú»¹Ô­Ê±ÏÔÊ¾"´°¿Ú»¹Ô­"
+		textArea1.append("çª—å£è¿˜åŸ\n");// çª—å£è¿˜åŸæ—¶æ˜¾ç¤º"çª—å£è¿˜åŸ"
 
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e) {
-		textArea1.append("´°¿Ú×îĞ¡»¯\n");// ´°¿Ú×îĞ¡»¯Ê±ÏÔÊ¾"´°¿Ú×îĞ¡»¯"
+		textArea1.append("çª—å£æœ€å°åŒ–\n");// çª—å£æœ€å°åŒ–æ—¶æ˜¾ç¤º"çª—å£æœ€å°åŒ–"
 	}
 
 	@Override
 	public void windowOpened(WindowEvent e) {
-		textArea1.append("´°¿Ú±»´ò¿ª\n");// ´°¿Ú±»´ò¿ªÊ±ÏÔÊ¾"´°¿Ú±»´ò¿ª"
+		textArea1.append("çª—å£è¢«æ‰“å¼€\n");// çª—å£è¢«æ‰“å¼€æ—¶æ˜¾ç¤º"çª—å£è¢«æ‰“å¼€"
 	}
 
 }
 
-³¢ÊÔ×Ô¼ºÔö¼ÓÊÂ¼ş²¶×½£¬ÊµÏÖ¹Øµô´°¿ÚÓĞÌáÊ¾
+å°è¯•è‡ªå·±å¢åŠ äº‹ä»¶æ•æ‰ï¼Œå®ç°å…³æ‰çª—å£æœ‰æç¤º
 package w;
 import java.awt.*;
 import java.awt.event.*;
@@ -339,12 +339,12 @@ class Terminator extends WindowAdapter
 
 }
 WindowListener listener=new Terminator();
-frame.addWindowListener(listener);//ÔÚframe.±àÒëÊ±³öÏÖÎŞ·¨Ê¶±ğ¡°.¡±µÄ´íÎó,ÔÚÍøÉÏËÑË÷Ã»ÓĞÕÒµ½ºÏÊÊµÄ´ğ°¸?
+frame.addWindowListener(listener);//åœ¨frame.ç¼–è¯‘æ—¶å‡ºç°æ— æ³•è¯†åˆ«â€œ.â€çš„é”™è¯¯,åœ¨ç½‘ä¸Šæœç´¢æ²¡æœ‰æ‰¾åˆ°åˆé€‚çš„ç­”æ¡ˆ?
 
 }
 
 5.
-²¶»ñ¼üÅÌÊÂ¼ş£¬ÀûÓÃ¹â±ê»­Í¼¡£
+æ•è·é”®ç›˜äº‹ä»¶ï¼Œåˆ©ç”¨å…‰æ ‡ç”»å›¾ã€‚
 
 package w;
 import java.awt.*;
@@ -393,25 +393,25 @@ class SketchPanel extends JPanel
 		last=end;
 		
 	}
-	public void paintComponent(Graphics g)//»æ»­×é¼ş
+	public void paintComponent(Graphics g)//ç»˜ç”»ç»„ä»¶
 	{
 		super.paintComponent(g);
 		Graphics2D g2=(Graphics2D) g;
-		for(Line2D l:lines)//Ö±Ïß
+		for(Line2D l:lines)//ç›´çº¿
 			g2.draw(l);
 	}
 	
 	private Point2D last;
 	private ArrayList<Line2D>lines;
 	
-	private  static final int SMALL_INCREMENT=1;//×îĞ¡ÔöÁ¿
-	private  static final int LARGE_INCREMENT=5;//×î´óÔöÁ¿
+	private  static final int SMALL_INCREMENT=1;//æœ€å°å¢é‡
+	private  static final int LARGE_INCREMENT=5;//æœ€å¤§å¢é‡
 	
 	private class KeyHandler implements KeyListener
 	{
-		public void keyPressed(KeyEvent event)//¶¨Òå°´ÏÂshiftºó·´Ó³
+		public void keyPressed(KeyEvent event)//å®šä¹‰æŒ‰ä¸‹shiftååæ˜ 
 		{
-		int keyCode=event.getKeyCode();//»ñÈ¡¼üÅÌÊı¾İ£¬ÏÂÃæÓĞÒ»¸öÍ¬ÑùµÄ·½·¨£¬¿¼ÂÇÊ¹ÓÃÄÚ²¿ÀàÖØĞ´Ò»´Î£¬¶¨ÒåÒ»¸ögetKeyÀà£¬ÏÂÁ½ÖÖ·½·¨£¬getKey.Type,getKey.Pressed,»ØÈ¥³¢ÊÔ¡£
+		int keyCode=event.getKeyCode();//è·å–é”®ç›˜æ•°æ®ï¼Œä¸‹é¢æœ‰ä¸€ä¸ªåŒæ ·çš„æ–¹æ³•ï¼Œè€ƒè™‘ä½¿ç”¨å†…éƒ¨ç±»é‡å†™ä¸€æ¬¡ï¼Œå®šä¹‰ä¸€ä¸ªgetKeyç±»ï¼Œä¸‹ä¸¤ç§æ–¹æ³•ï¼ŒgetKey.Type,getKey.Pressed,å›å»å°è¯•ã€‚
 		int d;
 		if(event.isShiftDown())
 			d=LARGE_INCREMENT;
@@ -422,11 +422,11 @@ class SketchPanel extends JPanel
 		else if(keyCode==KeyEvent.VK_UP) add(0,-d);
 		else if(keyCode==KeyEvent.VK_DOWN) add(0,d);
 	}
-	public void keyReleased(KeyEvent event) {}//ÊÍ·Å¼ì²â
+	public void keyReleased(KeyEvent event) {}//é‡Šæ”¾æ£€æµ‹
 	
 	public void keyTyped(KeyEvent event)
 	{
-		char keyChar=event.getKeyChar();//»ñÈ¡¼üÅÌÊı¾İ
+		char keyChar=event.getKeyChar();//è·å–é”®ç›˜æ•°æ®
 		int d;
 		if(Character.isUpperCase(keyChar))
 		{
@@ -434,7 +434,7 @@ class SketchPanel extends JPanel
 			keyChar=Character.toLowerCase(keyChar);
 		}
 		else
-			d=SMALL_INCREMENT;//¶¨ÒåÓÃhjkl²Ù×÷¹â±ê
+			d=SMALL_INCREMENT;//å®šä¹‰ç”¨hjklæ“ä½œå…‰æ ‡
 			if(keyChar=='h')add(-d,0);
 			else if(keyChar=='l')add(d,0);
 			else if(keyChar=='k')add(0,-d);
