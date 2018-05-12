@@ -1,0 +1,259 @@
+1.按钮和击键映射到动作对象
+package w;
+
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+
+
+
+public class Action {
+	public static void main(String[] args)
+	    {
+		    ActionFrame frame=new ActionFrame();
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+		}
+}
+class ActionFrame extends JFrame
+{
+	public ActionFrame()
+	{
+		setTitle("Action");
+		setSize(DEFAULT_WIDTH,DEFAULT_HEIGHT);
+		
+		ActionPanel panel=new ActionPanel();
+		add(panel);			
+	}
+	public static final int DEFAULT_WIDTH=300;
+	public static final int DEFAULT_HEIGHT=200;
+}
+class ActionPanel extends JPanel
+{
+	public  ActionPanel()
+	{
+		Action yellowAction=new ColorAction("Yellow",
+				new ImageIcon("yellow-ball.gif"),//程序总是报错，类型不匹配，将yellowAction改成ColorAction,则抛出异常at w.ActionPanel.<init>(Action.java:48)。
+				Color.YELLOW);
+		Action blueAction=new ColorAction("Blue",
+				new ImageIcon("blue-ball.gif"),
+				Color.BLUE);
+		Action redAction=new ColorAction("Red",
+				new ImageIcon("red-ball.gif"),
+				Color.RED);
+		add(new JButton((Icon) yellowAction));
+		add(new JButton((Icon) blueAction));
+		add(new JButton((Icon) redAction));
+		
+		InputMap imap=getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		
+		imap.put(KeyStroke.getKeyStroke("ctrl Y"),"panel.yellow");
+		imap.put(KeyStroke.getKeyStroke("ctrl B"),"panel.blue");
+		imap.put(KeyStroke.getKeyStroke("ctrl R"),"panel.red");
+		
+		ActionMap amap=getActionMap();
+		amap.put("panel.yellow",  yellowAction);
+		amap.put("panel.blue",  blueAction);
+		amap.put("panel.red",  redAction);
+	}
+	
+	
+private class ColorAction extends AbstractAction
+{
+	public ColorAction(String name,Icon icon,Color c)
+	{
+		putValue(Action.NAME,name);
+		putValue(Action.SMALL_ICON,icon);
+		putValue(Action.SHORT_DESCRIPTION,"Set panel color to"+name.toLowerCase());
+		putValue("color",c);
+		
+		
+	}
+	public void actionPerformed(ActionEvent event)
+	{
+		Color c=(Color)getValue("color");
+		setBackground(c);
+		
+	}
+
+}
+}
+
+总体来说，下面是将键与动作关联起来的方式：
+imap.put(KeyStroke.getKeyStroke("ctrl Y"),"panel.yellow")
+ActionMap amap=getActionMap();
+amap.put("panel.yellow",  yellowAction);
+
+2.
+void add(Class t,EventListener l)
+将一个事件监听器和它的类添加到列表中。存储这个类的原因是激活这个方法的事件可以有选择的调用事件。典型用法是：
+public void addXxxListener(XxxListener l)
+{
+listenerList.add(XxxListener.class,l)
+}
+参数：
+t 监听器类型
+l 监听器
+
+3
+简易计算器
+package w;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Calculator{	
+	public static void main(String[] args)
+	    {
+		    CalculatorFrame frame=new CalculatorFrame();
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setVisible(true);
+		}
+}
+class CalculatorFrame extends JFrame
+{
+	public CalculatorFrame()
+	{
+		setTitle("Calculator");
+		
+		
+		CalculatorPanel panel=new CalculatorPanel();
+		add(panel);	
+		pack();
+	}
+}
+class CalculatorPanel extends JPanel
+{
+	public  CalculatorPanel()
+	{
+		setLayout(new BorderLayout());
+		
+		result=0;
+		lastCommand="=";
+		start=true;
+		
+		display=new JButton("0");
+		display.setEnabled(false);
+		add(display,BorderLayout.NORTH);
+		
+		ActionListener insert=new InsertAction();
+		ActionListener command=new CommandAction();
+		
+		panel=new JPanel();
+		panel.setLayout(new GridLayout(4,4));
+		
+		addButton("7",insert);//按键增添
+		addButton("8",insert);
+		addButton("9",insert);
+		addButton("/",insert);
+		
+		addButton("4",insert);
+		addButton("5",insert);
+		addButton("6",insert);
+		addButton("*",insert);
+		
+		addButton("1",insert);
+		addButton("2",insert);
+		addButton("3",insert);
+		addButton("-",insert);
+		
+		addButton("0",insert);
+		addButton(".",insert);
+		addButton("=",insert);
+		addButton("+",insert);
+		
+		add(panel,BorderLayout.CENTER);
+}
+	private void addButton(String label,ActionListener listener)
+	{
+		JButton button=new JButton(label);
+		button.addActionListener(listener);
+		panel.add(button);
+	}
+	private class InsertAction implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			String input=event.getActionCommand();
+			if(start)
+			{
+				display.setText("");
+				start=false;
+			}
+			display.setText(display.getText()+input);
+		}
+	}
+	private class CommandAction implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			String command=event.getActionCommand();
+			
+			if(start)
+			{
+				if(command.equals("-"))
+				{
+					display.setText(command);
+					start=false;
+				}
+				else
+					lastCommand=command;
+			}
+				else
+				{
+					calculate(Double.parseDouble(display.getText()));
+					lastCommand=command;
+					start=true;
+				}
+			}
+		}
+
+	public void calculate(double x)//定义计算，实际操作并未执行？
+	{
+		if(lastCommand.equals("+"))result+=x;
+		else if(lastCommand.equals("-"))result-=x;
+		else if(lastCommand.equals("*"))result*=x;
+		else if(lastCommand.equals("/"))result/=x;
+		else if(lastCommand.equals("="))result=x;
+		display.setText(""+result);
+	}
+
+private JButton display;//私有类声明
+private JPanel panel;
+private double result;
+private String lastCommand;
+private boolean start;
+	
+	
+}
+4.
+文本域添加到窗口与添加按钮方式一样：
+JPanel panel=new JPanel();
+JTextField textField=new JTextField("Default input",20);
+panel.add(textField);
+其中"Default input"放入起初始化作用。20 为宽度值
+JTextField textField=new JTextField(20);
+不提供字符串参数。可以建立一个空白文本域。
+
+标签是容纳文本的组件。无修饰，不影响用户输入，可以利用标签标识组件。
+JLabel label=new JLable("Minutes",JLable.RIGHT);//JLabel是实现SwingConstants接口的Swing类，此指定右对齐标签。
+
+	
+
+	
+
+
+
+    
+
